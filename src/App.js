@@ -1,26 +1,23 @@
-import logo from './logo.svg';
+import { ForceGraph } from "./components/forceGraph";
 import './App.css';
 import useAxios from 'axios-hooks';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  height: 100%;
+  width: 100%;
+`;
 
 function App() {
+  const [{ data }] = useAxios(  {
+    url: 'http://localhost:8080/graph',
+    method: 'GET'
+  });
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+       ({ data && <ForceGraph linksData={data.links} nodesData={data.nodes} /> })
+    </Container>
   );
 }
 
