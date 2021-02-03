@@ -1,1 +1,12 @@
 neo4j-runtime/
+.idea
+.project
+target
+/.vscode
+*.iml
+*.class
+*.classpath
+*.jar
+*.pyc
+.settings
+/node_modules
