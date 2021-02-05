@@ -1,0 +1,9 @@
+type Member {
+	id: ID!,
+	title: String,
+}
+
+
+type Query {
+	getAllFunds(count: Int):[Fund]
+}

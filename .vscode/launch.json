@@ -5,9 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch SampleFundApplication",
+            "request": "launch",
+            "mainClass": "SampleFundApplication",
+            "projectName": "sdn6-funds"
+        },
+        {
             "name": "Client",
             "request": "launch",
-            "runtimeArgs": ["run-script", "start"],
+            "runtimeArgs": [
+                "run-script",
+                "start"
+            ],
             "runtimeExecutable": "npm",
             "type": "pwa-node"
         },
@@ -15,9 +25,9 @@
             "type": "java",
             "name": "Server",
             "request": "launch",
-            "mainClass": "funds.spring.data.neo4j.SampleFundApplication",
-            "projectName": "sdn6-funds" 
-        },
+            "mainClass": "funds.graphql.Application",
+            "projectName": "sdn6-funds"
+        }
     ],
     "compounds": [
         {
