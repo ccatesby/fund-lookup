@@ -5,13 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "java",
-            "name": "Launch SampleFundApplication",
-            "request": "launch",
-            "mainClass": "SampleFundApplication",
-            "projectName": "sdn6-funds"
-        },
-        {
             "name": "Client",
             "request": "launch",
             "runtimeArgs": [
@@ -25,7 +18,7 @@
             "type": "java",
             "name": "Server",
             "request": "launch",
-            "mainClass": "funds.graphql.Application",
+            "mainClass": "funds.spring.neo4j.FundLookupApplication",
             "projectName": "sdn6-funds"
         }
     ],

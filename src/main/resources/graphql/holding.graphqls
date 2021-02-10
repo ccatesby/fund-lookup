@@ -1,0 +1,5 @@
+type Holding @relation(name: "HOLDING") {
+    id: Int!
+    fund: Fund!
+    stock: Stock!
+}

@@ -1,0 +1,5 @@
+type Query {
+    fundByName(name: String): Fund
+    stockByName(name: String): Stock
+    healthcheck(info: String): String
+}

@@ -10,6 +10,7 @@
     "axios": "^0.21.1",
     "axios-hooks": "^2.3.0",
     "d3": "^5.16.0",
+    "graphql-hooks": "^5.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",

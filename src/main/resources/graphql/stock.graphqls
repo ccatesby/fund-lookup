@@ -1,0 +1,5 @@
+type Stock  {
+    id: ID!
+    name: String!
+    funds: [Holding]
+}
