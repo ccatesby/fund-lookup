@@ -1,0 +1,3 @@
+interface Edge {
+     id: Int!
+}

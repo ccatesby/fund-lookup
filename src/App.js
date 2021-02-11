@@ -2,8 +2,7 @@ import { Dashboard } from "./components/dashboard";
 import { GraphQLClient, ClientContext } from 'graphql-hooks'
 
 
-
-function App() {
+const App = () => {
   const client = new GraphQLClient({
     url: 'http://localhost:8080/graphql'
   })

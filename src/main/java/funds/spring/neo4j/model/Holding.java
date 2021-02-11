@@ -3,7 +3,7 @@ package funds.spring.neo4j.model;
 import org.neo4j.ogm.annotation.*;
 
 @RelationshipEntity(type = "HOLDING")
-public class Holding {
+public class Holding implements Edge {
 
     @Id
     @GeneratedValue

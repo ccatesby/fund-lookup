@@ -1,6 +1,5 @@
 import * as d3 from "d3";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import {createContextMenu} from "./utils";
 
 export function runForceGraph(
   container,
@@ -43,7 +42,7 @@ export function runForceGraph(
 
   const simulation = d3
     .forceSimulation(nodes)
-    .force("link", d3.forceLink(links).id(d => d.index))
+    .force("link", d3.forceLink(links).id(d => d.id))
     .force("charge", d3.forceManyBody().strength(-12250))
     .force('center', d3.forceCenter(width / 2, height / 2));
 
@@ -85,8 +84,8 @@ export function runForceGraph(
     .append("text")
     .attr('text-anchor', 'middle')
     .attr('dominant-baseline', 'central')
-    .attr("class", d => `fa ${d.title}`)
-    .text(d => d.title)
+    .attr("class", d => `fa ${d.name}`)
+    .text(d => d.name)
     .call(drag(simulation));
 
 

@@ -21,23 +21,14 @@ public class QueryResolver implements GraphQLQueryResolver {
     @Autowired
     StockService stockService;
 
-    // @Autowired
-    // SearchableService searchableService;
-
-    // public Optional<Fund> getFund(Long id) {
-    //     LOGGER.info("Getting genre by id: {}", id);
-    //     return fundService.getFund(id);
-    // }
+    @Autowired
+    SearchableService searchableService;
 
     public Optional<Fund> getFundByName(String name) {
         LOGGER.info("Getting genre by name: {}", name);
         return fundService.getFundByName(name);
     }
 
-    // public Optional<Stock> getStock(Long id) {
-    //     LOGGER.info("Getting person by id: {}", id);
-    //     return stockService.getStock(id);
-    // }
     public Optional<Stock> getStockByName(String name) {
         LOGGER.info("Getting person by name: {}", name);
         return stockService.getStockByName(name);
@@ -48,16 +39,11 @@ public class QueryResolver implements GraphQLQueryResolver {
         return "Healthcheck: " + info;
     }
     
-    // public ForceGraph graphByName(String name) {
-    //     var nodes = new ArrayList<Searchable>();
-    //     var links = new ArrayList<Edge>();
+    public ForceGraph graphByName(String name) {
+        LOGGER.info("Get Graph: {}", name);
         
-    //     var result = searchableService.getSearchableByName(name);
-    //     result.forEach(record -> {
-            
-          
-    //     });
-    //     return new ForceGraph(links, nodes);
-    // }
-    
+        var result = searchableService.getSearchableByName(name);
+
+        return result.get(0);
+    }
 }

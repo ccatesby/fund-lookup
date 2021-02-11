@@ -1,5 +1,5 @@
-type Stock  {
-    id: ID!
+type Stock  implements Searchable {
+    id: Int!
     name: String!
-    funds: [Holding]
+    funds: [Holding] @relation(name: "HOLDING")
 }

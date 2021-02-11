@@ -1,0 +1,6 @@
+type GraphEdge {
+    id: Int!
+    type: String!
+    source: Int!
+    target: Int
+}

@@ -1,4 +1,4 @@
-type Holding @relation(name: "HOLDING") {
+type Holding implements Edge {
     id: Int!
     fund: Fund!
     stock: Stock!

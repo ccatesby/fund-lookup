@@ -3,21 +3,27 @@ import { useQuery } from 'graphql-hooks'
 
 export function Dashboard() {
     const GRAPH_QUERY = `query {
-        fundByName(name:"1832") {
-          name
-          stocks{
-            name 
+      graphByName(name:"1832") {
+          nodes{
+            id
+            name
+          }
+        links{
+          type
+          source
+          target
           }
         }
-      }`
-      const {data} = useQuery(GRAPH_QUERY, {
-        variables: { language: 'english' },
-      });
-      console.log(data);
+      }
+      
+      `
+    const {data} = useQuery(GRAPH_QUERY, {
+      variables: { language: 'english' },
+    });
 
   return (
     <>
-        ({ data && <ForceGraph linksData={data.links} nodesData={data.nodes} /> })
+        ({ data && <ForceGraph linksData={data.graphByName.links} nodesData={data.graphByName.nodes} /> })
     </>
   );
 }
