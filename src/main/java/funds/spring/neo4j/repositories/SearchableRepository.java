@@ -15,6 +15,6 @@ import java.util.UUID;
 @Repository
 public interface SearchableRepository extends Neo4jRepository<Searchable, UUID> {
 
-     @Query("MATCH (n {name:\"1832\"})-[r]->(k) WITH COLLECT(DISTINCT(n))+COLLECT(k) AS nodes, COLLECT({id: ID(r), type: r.type, source: ID(n), target: ID(k)}) AS links RETURN nodes, links ")
-     List<ForceGraph> findByName(String name);
+     @Query("MATCH (n) WHERE id(n)= $nodeId OPTIONAL MATCH (n)-[r]->(k) WITH COLLECT(DISTINCT(n))+COLLECT(k) AS nodes, COLLECT({id: ID(r), type: r.type, source: ID(n), target: ID(k)}) AS links RETURN nodes, links ")
+     List<ForceGraph> findGraphById(Long nodeId);
 }

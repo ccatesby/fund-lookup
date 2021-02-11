@@ -3,7 +3,7 @@ import { useQuery } from 'graphql-hooks'
 
 export function Dashboard() {
     const GRAPH_QUERY = `query {
-      graphByName(name:"1832") {
+      graphById(id:1) {
           nodes{
             id
             name
@@ -12,18 +12,15 @@ export function Dashboard() {
           type
           source
           target
-          }
         }
       }
-      
+    }
       `
-    const {data} = useQuery(GRAPH_QUERY, {
-      variables: { language: 'english' },
-    });
-
+  const {data} = useQuery(GRAPH_QUERY);
+ 
   return (
     <>
-        ({ data && <ForceGraph linksData={data.graphByName.links} nodesData={data.graphByName.nodes} /> })
+        ({ data && <ForceGraph linksData={data.graphById.links} nodesData={data.graphById.nodes} /> })
     </>
   );
 }

@@ -15,7 +15,7 @@ public class SearchableService {
     @Autowired
     SearchableRepository searchableRepository;
 
-    public List<ForceGraph> getSearchableByName(String name) {
-        return searchableRepository.findByName(name);
+    public List<ForceGraph> findGraphById(Long id) {
+        return searchableRepository.findGraphById(id);
     }
 }

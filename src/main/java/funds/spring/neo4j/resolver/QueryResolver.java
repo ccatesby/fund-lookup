@@ -39,10 +39,10 @@ public class QueryResolver implements GraphQLQueryResolver {
         return "Healthcheck: " + info;
     }
     
-    public ForceGraph graphByName(String name) {
-        LOGGER.info("Get Graph: {}", name);
+    public ForceGraph getGraphById(Long id) {
+        LOGGER.info("Get Graph:", id);
         
-        var result = searchableService.getSearchableByName(name);
+        var result = searchableService.findGraphById(id);
 
         return result.get(0);
     }
