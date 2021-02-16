@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { ForceGraph3D } from 'react-force-graph';
-import { useGraphData } from './forceGraphHooks';
+import { useGraphData } from './hooks';
 
-export function RunForceGraph({ refetch }) {
+const ForceGraph = ({ refetch }) => {
   const { fetchGraphData, graphData } = useGraphData(refetch);
 
   useEffect(() => {
@@ -37,10 +37,10 @@ export function RunForceGraph({ refetch }) {
         nodeOpacity={1}
         nodeId="id"
         nodeVal={nodeVal}
-        nodeLabel="linksCount"
         backgroundColor="#101020"
         nodeColor={getNodeColor}
       />
     </>
   );
 }
+export { ForceGraph };

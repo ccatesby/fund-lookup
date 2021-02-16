@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { filter, pipe, forEach, curry } from 'ramda';
+import { filter, pipe, forEach, curry, compose } from 'ramda';
 
 const unquieIds = (arrayData) => new Set(arrayData.map((d) => d.id));
 
@@ -15,16 +15,16 @@ const curryCountLinks = curry(
     )(links).length,
 );
 
-const curryHasLink = curry(
+const curryHasDuplicateLink = curry(
   (links, link) =>
-    filter(
+    links.filter(
       (l) =>
         ((getTargetNode(l.target) === getTargetNode(link.target) &&
           getTargetNode(l.source) === getTargetNode(link.source)) ||
           (getTargetNode(l.target) === getTargetNode(link.source) &&
             getTargetNode(l.source) === getTargetNode(link.target))) &&
         link.type === l.type,
-    )(links).length === 0,
+    ).length === 0,
 );
 
 const filterById = curry((unquieIds, updatedNodeData) =>
@@ -39,25 +39,23 @@ const useGraphData = (refetch) => {
     links: [],
   });
 
-  const filterExistingNodes = filterById(unquieIds(graphData.nodes));
-  const mergeIntoExistingNodes = mergeArrays(graphData.nodes);
-  const filterExisting = curryHasLink(graphData.nodes);
-  const mergeLinks = mergeArrays(graphData.links);
-
-  const filterExistingLinks = (updatedLinks) =>
-    filter(filterExisting)(updatedLinks);
-
-  const pipeUpdatedLinks = pipe(filterExistingLinks, mergeLinks);
+  const filterExistingNodes = compose(filterById, unquieIds);
+  const filterExistingLinks = compose(filter, curryHasDuplicateLink);
 
   const appendLinkCount = curry((links, nodes) => {
     const countLinksForNode = curryCountLinks(links);
     return forEach((n) => (n.linksCount = countLinksForNode(n)))(nodes);
   });
 
+  const pipeUpdatedLinks = pipe(
+    filterExistingLinks(graphData.links),
+    mergeArrays(graphData.links),
+  );
+
   const pipeUpdatedNodes = (updatedLinks) =>
     pipe(
-      filterExistingNodes,
-      mergeIntoExistingNodes,
+      filterExistingNodes(graphData.nodes),
+      mergeArrays(graphData.nodes),
       appendLinkCount(updatedLinks),
     );
 
@@ -66,7 +64,7 @@ const useGraphData = (refetch) => {
       variables: { nodeId: nodeId },
     });
     const { nodes, links } = data.graphById;
-    const updatedLinks = pipeUpdatedLinks(links);
+    const updatedLinks = pipeUpdatedLinks(links, graphData.links);
     const updatedNodes = pipeUpdatedNodes(updatedLinks)(nodes);
 
     setGraphData({

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from 'graphql-hooks'
-import { RunForceGraph } from './RunForceGraph';
+import { ForceGraph } from './forceGraph/ForceGraph';
 
 export function Dashboard() {
   const GRAPH_QUERY = `query($nodeId: Int) {
@@ -18,10 +18,8 @@ export function Dashboard() {
       }
     }
       `
-  const nodeId = 1;
-  const { refetch } = useQuery(GRAPH_QUERY, {
-    variables: { nodeId }
-  });
 
-  return <RunForceGraph refetch={refetch} />;
+  const { refetch } = useQuery(GRAPH_QUERY);
+
+  return <ForceGraph refetch={refetch} />;
 }
