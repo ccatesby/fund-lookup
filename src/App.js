@@ -1,6 +1,6 @@
 import React from 'react';
 import { GraphQLClient, ClientContext } from 'graphql-hooks'
-import { Dashboard } from "./components/dashboard";
+import { Site } from './pages/Site';
 
 const App = () => {
   const client = new GraphQLClient({
@@ -9,7 +9,7 @@ const App = () => {
 
   return (
     <ClientContext.Provider value={client}>
-      <Dashboard />
+      <Site />
     </ClientContext.Provider>
   );
 }

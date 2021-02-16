@@ -1,8 +1,8 @@
 import React from 'react';
 import { useQuery } from 'graphql-hooks'
-import { ForceGraph } from './forceGraph/ForceGraph';
+import { ForceGraph } from '../components/forceGraph/ForceGraph';
 
-export function Dashboard() {
+const Dashboard = () => {
   const GRAPH_QUERY = `query($nodeId: Int) {
       graphById(id:$nodeId) {
           nodes{
@@ -23,3 +23,4 @@ export function Dashboard() {
 
   return <ForceGraph refetch={refetch} />;
 }
+export { Dashboard };
