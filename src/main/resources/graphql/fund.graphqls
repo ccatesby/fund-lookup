@@ -1,5 +1,6 @@
 type Fund implements Searchable{
     id: Int!
     name: String!
+    type: String!
     stocks: [Holding] @relation(name: "HOLDING")
 }

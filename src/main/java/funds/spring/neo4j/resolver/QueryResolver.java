@@ -34,6 +34,11 @@ public class QueryResolver implements GraphQLQueryResolver {
         return stockService.getStockByName(name);
     }
 
+    public Sector getSectorByName(String name) {
+        LOGGER.info("Getting sector by name: {}", name);
+        return new Sector();
+    }
+
     public String healthcheck(String info) {
         LOGGER.info("Healthcheck: {}", info);
         return "Healthcheck: " + info;

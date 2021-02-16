@@ -1,4 +1,5 @@
 interface Searchable {
     id: Int!
     name: String!
+    type: String!
 }

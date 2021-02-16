@@ -4,16 +4,15 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.2",
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.6.3",
     "axios": "^0.21.1",
     "axios-hooks": "^2.3.0",
     "d3": "^5.16.0",
     "graphql-hooks": "^5.1.0",
+    "ramda": "^0.27.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-scripts": "4.0.1",
+    "react-force-graph": "^1.37.6",
+    "react-scripts": "3.4.4",
     "styled-components": "^5.2.1",
     "use-axios-hooks": "^1.0.4",
     "web-vitals": "^0.2.4"
@@ -24,12 +23,89 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all",
+    "endOfLine":"auto"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "plugin:prettier/recommended",
+      "prettier",
+      "prettier/react"
+    ],
+    "plugins": [
+      "import",
+      "react",
+      "prettier"
+    ],
+    "rules": {
+      "react/prop-types": 0,
+      "react/default-props-match-prop-types": 0,
+      "react/destructuring-assignment": 0,
+      "react/no-unused-prop-types": 0,
+      "react/no-did-update-set-state": 0,
+      "react/require-default-props": 0,
+      "react/sort-comp": 0,
+      "react/jsx-one-expression-per-line": 0,
+      "react/jsx-wrap-multilines": 0,
+      "react/jsx-indent": 0,
+      "react/jsx-closing-tag-location": 0,
+      "react/jsx-curly-spacing": 0,
+      "react/jsx-equals-spacing": 0,
+      "react/jsx-first-prop-new-line": 0,
+      "react/jsx-indent-props": 0,
+      "react/jsx-max-props-per-line": 0,
+      "react/jsx-props-no-multi-spaces": 0,
+      "react/jsx-tag-spacing": 0,
+      "react/jsx-closing-bracket-location": 0,
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js"
+          ]
+        }
+      ],
+      "import/no-unresolved": 0,
+      "import/prefer-default-export": 0,
+      "jsx-a11y/click-events-have-key-events": 0,
+      "no-nested-ternary": 0,
+      "implicit-arrow-linebreak": 0,
+      "object-curly-newline": 0,
+      "function-paren-newline": 0,
+      "prefer-promise-reject-errors": 0,
+      "prefer-destructuring": 1,
+      "no-confusing-arrow": 0,
+      "operator-linebreak": 0,
+      "indent": 0,
+     
+     
+      "no-plusplus": [
+        "error",
+        {
+          "allowForLoopAfterthoughts": true
+        }
+      ],
+      "no-unused-vars": [
+        "error",
+        {
+          "varsIgnorePattern": "^_",
+          "ignoreRestSiblings": true
+        }
+      ],
+      "prettier/prettier": "error",
+      "jsx-a11y/label-has-for": 0
+    }
   },
+  "eslintIgnore": [
+    "**/*.test.js",
+    "**/*.spec.jsx",
+    "**/test-helpers/**",
+    "**/node_modules/**"
+  ],
+  "rules": {},
   "browserslist": {
     "production": [
       ">0.2%",
@@ -41,5 +117,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "eslint-plugin-import": "^2.22.1",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.6.3",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1"
   }
 }

@@ -1,0 +1,5 @@
+type Sector implements Searchable{
+    id: Int!
+    type: String!
+    name: String!
+}

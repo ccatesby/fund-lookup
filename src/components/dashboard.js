@@ -1,12 +1,14 @@
-import { ForceGraph } from "./forceGraph";
+import React from 'react';
 import { useQuery } from 'graphql-hooks'
+import { RunForceGraph } from './RunForceGraph';
 
 export function Dashboard() {
-    const GRAPH_QUERY = `query {
-      graphById(id:1) {
+  const GRAPH_QUERY = `query($nodeId: Int) {
+      graphById(id:$nodeId) {
           nodes{
             id
             name
+            type
           }
         links{
           type
@@ -16,12 +18,10 @@ export function Dashboard() {
       }
     }
       `
-  const {data} = useQuery(GRAPH_QUERY);
- 
-  return (
-    <>
-        ({ data && <ForceGraph linksData={data.graphById.links} nodesData={data.graphById.nodes} /> })
-    </>
-  );
-}
+  const nodeId = 1;
+  const { refetch } = useQuery(GRAPH_QUERY, {
+    variables: { nodeId }
+  });
 
+  return <RunForceGraph refetch={refetch} />;
+}

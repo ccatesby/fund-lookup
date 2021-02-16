@@ -3,4 +3,5 @@ type Query {
     graphById(id:Int): ForceGraph
     stockByName(name: String): Stock
     healthcheck(info: String): String
+    sectorByName(name: String): Sector
 }
