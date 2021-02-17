@@ -6,8 +6,10 @@ import funds.spring.neo4j.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -50,5 +52,11 @@ public class QueryResolver implements GraphQLQueryResolver {
         var result = searchableService.findGraphById(id);
 
         return result.get(0);
+    }
+
+    public List<Fund> getAllFunds(int page, int size) {
+        LOGGER.info("Get all Funds");
+        
+        return fundService.findAll(PageRequest.of(page, size));
     }
 }

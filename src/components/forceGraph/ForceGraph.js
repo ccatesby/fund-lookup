@@ -37,7 +37,8 @@ const ForceGraph = ({ refetch }) => {
         nodeOpacity={1}
         nodeId="id"
         nodeVal={nodeVal}
-        backgroundColor="#101020"
+        backgroundColor="#343334"
+        linkColor="white"
         nodeColor={getNodeColor}
       />
     </>

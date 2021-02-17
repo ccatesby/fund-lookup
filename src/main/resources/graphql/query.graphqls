@@ -4,4 +4,5 @@ type Query {
     stockByName(name: String): Stock
     healthcheck(info: String): String
     sectorByName(name: String): Sector
+    allFunds(page: Int = 0, size: Int = 10): [Fund]!
 }
