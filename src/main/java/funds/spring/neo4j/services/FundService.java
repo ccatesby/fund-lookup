@@ -16,7 +16,7 @@ public class FundService {
     FundRepository fundRepository;
 
     public Optional<Fund> getFund(Long id) {
-        return fundRepository.findById(id);
+        return fundRepository.findById(id, 2);
     }
 
     public Optional<Fund> getFundByName(String name) {

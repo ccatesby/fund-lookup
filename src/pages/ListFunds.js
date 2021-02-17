@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from 'graphql-hooks';
 import styled from 'styled-components';
+import { navigate } from '@reach/router';
 
 const Container = styled.div`
   display: flex;
@@ -12,7 +13,7 @@ const ListFunds = () => {
     allFunds(page: 0, size: 10) {
         id
         name
-    }
+      }
     }
     
     `;
@@ -20,7 +21,12 @@ const ListFunds = () => {
 
   return (
     <Container>
-      {data && data.allFunds.map((x) => <div> {x.name} </div>)}
+      <ul>
+        {data &&
+          data.allFunds.map((x) => (
+            <li onClick={() => navigate(`/stocks/${x.id}`)}> {x.name} </li>
+          ))}
+      </ul>
     </Container>
   );
 };

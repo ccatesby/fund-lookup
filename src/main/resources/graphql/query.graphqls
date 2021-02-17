@@ -1,5 +1,6 @@
 type Query {
     fundByName(name: String): Fund
+    fundById(id:Int): Fund
     graphById(id:Int): ForceGraph
     stockByName(name: String): Stock
     healthcheck(info: String): String

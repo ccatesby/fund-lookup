@@ -1,5 +1,6 @@
 package funds.spring.neo4j.model;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.Labels;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -12,7 +13,8 @@ import java.util.Objects;
 @NodeEntity
 public class Fund implements Searchable {
 
-    @Id
+    @Id 
+    @GeneratedValue
     private Long id;
 
     private String name;
