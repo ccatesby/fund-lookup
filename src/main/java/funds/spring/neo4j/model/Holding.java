@@ -15,6 +15,11 @@ public class Holding implements Edge {
     @EndNode
     Stock stock;
 
+    private Float price;
+    private Long shares;
+    private Long snapshotFrom;
+    private Long snapshotTo;
+
     public Holding() {
     }
 

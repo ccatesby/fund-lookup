@@ -2,4 +2,6 @@ type Holding implements Edge {
     id: Int!
     fund: Fund!
     stock: Stock!
+    price: Float
+    shares: Int
 }
