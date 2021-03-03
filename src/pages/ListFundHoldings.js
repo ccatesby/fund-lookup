@@ -7,14 +7,18 @@ const Container = styled.div`
   color: black;
 `;
 
-const ListStocks = ({ fundId }) => {
-  console.log(fundId);
+const ListFundHoldings = ({ fundId }) => {
+
   const GRAPH_QUERY = `query($fundId: Int) {
-    fundById(id:$fundId) {
+    funds(filter:{id: $fundId, holding_and: {isCurrent: true}}) {
+      name
       stocks {
+        id,
         stock {
           name
         }
+        price
+        shares
       }
     }
   }
@@ -22,14 +26,14 @@ const ListStocks = ({ fundId }) => {
   const { data } = useQuery(GRAPH_QUERY, {
     variables: { fundId },
   });
-  console.log(data);
+
   return (
     <Container>
       <ul>
-        {data && data.fundById.stocks.map((x) => <li> {x.stock.name} </li>)}
+        {data && data.funds[0].stocks.map((x) => <li> {x.stock.name} </li>)}
       </ul>
     </Container>
   );
 };
 
-export { ListStocks };
+export { ListFundHoldings  };

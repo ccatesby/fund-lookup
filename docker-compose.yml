@@ -10,6 +10,7 @@ services:
       - NEO4J_AUTH=none # Just click on the login button without password
       # - NEO4J_USERNAME=neo4j
       # - NEO4J_PASSWORD=test
+
     ports:
       - "7474:7474"  # Go to http://localhost:7474/browser/ after bootstrapping
       - "7687:7687"

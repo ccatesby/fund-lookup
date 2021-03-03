@@ -24,7 +24,7 @@ const ListFunds = () => {
       <ul>
         {data &&
           data.allFunds.map((x) => (
-            <li onClick={() => navigate(`/stocks/${x.id}`)}> {x.name} </li>
+            <li onClick={() => navigate(`/holdings/${x.id}`)}> {x.name} </li>
           ))}
       </ul>
     </Container>

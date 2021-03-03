@@ -1,0 +1,6 @@
+input FundFilter {
+    holding_and: HoldingFilter
+    holding_or: HoldingFilter
+    name: String
+    id: Int
+}

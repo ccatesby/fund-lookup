@@ -1,0 +1,7 @@
+input HoldingFilter {
+    price: Float
+    shares: Int
+    snapshotFrom: Int
+    snapshotTo: Int
+    isCurrent: Boolean
+}

@@ -30,11 +30,11 @@ class Neo4jSeedSECReports:
 
                 WITH fund,stock,line
                 OPTIONAL MATCH (fund)-[r:HOLDING ]->(stock)
-                WHERE r.snapshot_to = 0
-                SET r.snapshot_to = timeStamp()
+                WHERE r.snapshotTo = 0
+                SET r += {{snapshotTo: timeStamp(), isCurrent: false}}
 
                 WITH fund,stock,line
-                MERGE (fund)-[:HOLDING {{price:toFloat(coalesce(line["Recent Price"], 0)), shares: toInteger(line["Shares Held"]), type:"holding", snapshotTo:0, snapshotFrom: timeStamp() }}]->(stock)
+                MERGE (fund)-[:HOLDING {{price:toFloat(coalesce(line["Recent Price"], 0)), shares: toInteger(line["Shares Held"]), type:"holding", snapshotTo:0, snapshotFrom: timeStamp(), isCurrent: true }}]->(stock)
 
                 MERGE (stock)-[:STOCK_SECTOR{{ type: "stock_sector" }}]->(sector)""")
                 

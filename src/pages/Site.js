@@ -3,7 +3,7 @@ import React from 'react';
 import { Router } from '@reach/router';
 import { Layout } from './Layout';
 import { ListFunds } from './ListFunds';
-import { ListStocks } from './ListStocks';
+import { ListFundHoldings } from './ListFundHoldings';
 import { Dashboard } from './Dashboard';
 
 const Site = () => {
@@ -11,7 +11,7 @@ const Site = () => {
     <Router>
       <Layout path="/">
         <ListFunds path="/funds/" />
-        <ListStocks path="/stocks/:fundId" />
+        <ListFundHoldings path="/holdings/:fundId" />
         <Dashboard path="dashboard" />
       </Layout>
     </Router>

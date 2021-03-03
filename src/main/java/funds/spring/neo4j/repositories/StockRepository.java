@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-
 @Repository
 public interface StockRepository extends Neo4jRepository<Stock, Long> {
     Optional<Stock> findByName(String name);

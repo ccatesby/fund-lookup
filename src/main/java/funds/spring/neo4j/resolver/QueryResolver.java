@@ -35,6 +35,10 @@ public class QueryResolver implements GraphQLQueryResolver {
         return fundService.getFund(id);
     }
 
+    public List<Fund> getFunds(FundFilter filter) {
+        return fundService.getFundByFilter(filter.getQuery());
+    }
+
     public Optional<Stock> getStockByName(String name) {
         LOGGER.info("Getting person by name: {}", name);
         return stockService.getStockByName(name);
