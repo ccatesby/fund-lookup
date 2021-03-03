@@ -5,6 +5,7 @@ import { Layout } from './Layout';
 import { ListFunds } from './ListFunds';
 import { ListFundHoldings } from './ListFundHoldings';
 import { Dashboard } from './Dashboard';
+import { RealTime } from './RealTime';
 
 const Site = () => {
   return (
@@ -13,6 +14,7 @@ const Site = () => {
         <ListFunds path="/funds/" />
         <ListFundHoldings path="/holdings/:fundId" />
         <Dashboard path="dashboard" />
+        <RealTime path="realtime" />
       </Layout>
     </Router>
   );

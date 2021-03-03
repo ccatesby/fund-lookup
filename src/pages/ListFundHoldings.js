@@ -8,7 +8,6 @@ const Container = styled.div`
 `;
 
 const ListFundHoldings = ({ fundId }) => {
-
   const GRAPH_QUERY = `query($fundId: Int) {
     funds(filter:{id: $fundId, holding_and: {isCurrent: true}}) {
       name
@@ -36,4 +35,4 @@ const ListFundHoldings = ({ fundId }) => {
   );
 };
 
-export { ListFundHoldings  };
+export { ListFundHoldings };
