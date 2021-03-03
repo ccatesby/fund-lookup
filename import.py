@@ -15,7 +15,7 @@ class Neo4jSeedSECReports:
 
     @staticmethod
     def _seed_reports(tx):
-        arr = os.listdir('import/files')
+        arr = os.listdir('import')
         for file in arr:
             fundName = file.split("-")[0].replace("_", " ")
             print(fundName)

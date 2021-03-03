@@ -1,20 +1,62 @@
-version: '3.0'
-
+---
+version: '2'
 services:
   neo4j:
-    build:
-      context: .
-    image: ccatesbt/neo4j-fund-lookup:${IMAGE_TAG:-latest}
-    environment:
-      # - NEO4J_AUTH=neo4j/test # Just click on the login button without password
-      - NEO4J_AUTH=none # Just click on the login button without password
-      # - NEO4J_USERNAME=neo4j
-      # - NEO4J_PASSWORD=test
-
+    image: neo4j:3.5.8-enterprise
+    hostname: neo4j
+    container_name: neo4j
     ports:
-      - "7474:7474"  # Go to http://localhost:7474/browser/ after bootstrapping
-      - "7687:7687"
+    - "7474:7474"
+    - "7687:7687"
     volumes:
+      - ./plugins:/plugins
       - ./import:/var/lib/neo4j/import
-      - ./neo4j-runtime/plugins:/plugins"
-      - ./cypher_query.cql:/cyphers/uploadReports.cql
+    environment:
+      NEO4J_kafka_zookeeper_connect: zookeeper:2181
+      NEO4J_kafka_bootstrap_servers: broker:9093
+      NEO4J_AUTH: neo4j/password
+      NEO4J_dbms_memory_heap_max__size: 8G
+      NEO4J_ACCEPT_LICENSE_AGREEMENT: "yes"
+
+      NEO4J_dbms_logs_debug_level: DEBUG
+      # KAFKA related configuration
+      NEO4J_streams_source_topic_nodes_neo4j: Stock{*}
+      NEO4J_streams_source_topic_relationships_neo4j: HOLDING{*}
+  zookeeper:
+    image: confluentinc/cp-zookeeper
+    hostname: zookeeper
+    container_name: zookeeper
+    ports:
+    - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  broker:
+    image: confluentinc/cp-enterprise-kafka
+    hostname: broker
+    container_name: broker
+    depends_on:
+    - zookeeper
+    ports:
+    - "9092:9092"
+    expose:
+    - "9093"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:9093,OUTSIDE://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9093,OUTSIDE://0.0.0.0:9092
+      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: broker:9093
+
+      # workaround if we change to a custom name the schema_registry fails to start
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper:2181
+      CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
+      CONFLUENT_METRICS_ENABLE: 'true'
+      CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
